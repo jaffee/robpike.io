@@ -18,10 +18,10 @@ func handleConn(conn net.Conn) {
 	}
 	tb := []byte{74, 74}
 	for {
-		t := time.Now()
+//		t := time.Now()
 		_, err = conn.Write(tb)
-		elapsed := time.Since(t)
-		fmt.Printf("Elapsed time for write: %v\n", elapsed)
+//		elapsed := time.Since(t)
+//		fmt.Printf("Elapsed time for write: %v\n", elapsed)
 		if err != nil {
 			fmt.Printf("Lost Connection %v\n", conn.RemoteAddr())
 			return
