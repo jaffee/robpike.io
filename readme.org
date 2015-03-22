@@ -1,0 +1,18 @@
+* HTTP Chunked Transfer
+
+For those of you that haven't been to [[http://robpike.io]] you should go check
+it out... it's a treat. This is my take on that - basically when a
+browser requests a page, it sends back an HTTP 200 header and then
+trickles data back, a little bit at a time, forever. This is possible
+due to some features of HTTP 1.1 which specifically allow for this
+behavior, so that servers can serve dynamic content without knowing
+the length of the response a priori. You don't see it used much these
+days because well... javascript.
+
+This is (probably) currently running at [[http://robpike.jaffee.co]] if you want
+to check it out.
+
+I'd like to have it select the characters it returns dynamically - I
+think basing it off of the latency of the connection would be cool,
+although I'm not sure that there's any way to get that information
+without dropping to a more basic interface than a TCP socket.
