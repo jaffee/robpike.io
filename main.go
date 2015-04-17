@@ -1,14 +1,14 @@
 package main
 
 import (
+	"fmt"
 	"net"
 	"time"
-	"fmt"
 )
 
 func handleConn(conn net.Conn) {
 	fmt.Printf("New Connection %v\n", conn.RemoteAddr())
-	packet := "HTTP/1.1 200 OK\nContent-Type: text/plain; charset=ascii\n\n"
+	packet := "HTTP/1.1 200 OK\nContent-Type: text/plain; charset=ascii\nTransfer-Encoding: chunked\n\n"
 	buff := make([]byte, len(packet))
 	copy(buff[:], packet)
 	_, err := conn.Write(buff)
@@ -18,15 +18,12 @@ func handleConn(conn net.Conn) {
 	}
 	tb := []byte{74, 74}
 	for {
-//		t := time.Now()
 		_, err = conn.Write(tb)
-//		elapsed := time.Since(t)
-//		fmt.Printf("Elapsed time for write: %v\n", elapsed)
 		if err != nil {
 			fmt.Printf("Lost Connection %v\n", conn.RemoteAddr())
 			return
 		}
-		time.Sleep(time.Second)
+		time.Sleep(time.Second / 2)
 	}
 }
 
